@@ -3,9 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './assets/style.css'
-// import
+import { apiClient } from './plugins/axios'
 
 Vue.config.productionTip = false
+Vue.prototype.$http  = apiClient
 
 new Vue({
   router,

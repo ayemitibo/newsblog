@@ -31,6 +31,23 @@ export default {
     BlogCard,
     Category,
   },
+  data() {
+    return {
+      location: null,
+      gettingLocation: false,
+      errorStr: null,
+    };
+  },
+  async mounted() {
+    let country = await this.$http.get("https://www.iplocate.io/api/lookup/");
+    let news = await this.$http.get("/top-headlines", {
+      params: {
+        country: country.country_code,
+      },
+    });
+
+    console.log(news, "news");
+  },
 };
 </script>
 
