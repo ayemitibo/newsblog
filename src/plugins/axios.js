@@ -2,7 +2,7 @@ import axios from "axios";
 // import Nprogress from "nprogress";
 
 export const apiClient = axios.create({
-  baseURL: "/",
+  baseURL: "https://newsapi.org/v2/",
   headers: {
     Accept: "application/json",
     'X-Api-Key' : '96ef503dc8664873a3299cab06b09f86'
