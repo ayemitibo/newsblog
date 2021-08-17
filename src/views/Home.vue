@@ -45,6 +45,9 @@ export default {
       params: {
         country: country.country_code,
       },
+      headers: {
+        Accept: "application/json",
+      },
     });
     this.news = news;
     this.country = country.country;
