@@ -13,9 +13,12 @@
       :style="{ backgroundColor: category.color }"
     >
       <div class="p-3">
-        <a href="#" class="stretched-link btn-link fw-bold text-white h5">{{
-          category.title
-        }}</a>
+        <router-link
+          tag="a"
+          :to="`/category/${category.title}`"
+          class="stretched-link btn-link fw-bold text-white h5 capitalize"
+          >{{ category.title }}</router-link
+        >
       </div>
     </div>
   </div>

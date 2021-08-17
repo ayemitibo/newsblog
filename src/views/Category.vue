@@ -61,6 +61,14 @@ export default {
       loading: false,
     };
   },
+  watch: {
+    "$route.params": {
+      deep: true,
+      handler() {
+        this.getBlog();
+      },
+    },
+  },
   async mounted() {
     let country = await this.$http.get("https://www.iplocate.io/api/lookup/");
     this.country = country;
@@ -78,6 +86,7 @@ export default {
         params: {
           country: this.country.country_code,
           page: item || 1,
+          category: this.$route.params?.category,
         },
       });
       this.news = news;

@@ -1,17 +1,18 @@
 <template>
   <div class="w-1/2 px-6">
     <div class="card">
-      <div
-        class="relative"
-        :style="[
-          !news.urlToImage ? { backgroundColor: 'black', height: '300px' } : '',
-        ]"
-      >
+      <div class="relative">
         <img
           class="rounded-2xl"
           :src="news.urlToImage"
           alt="Card image"
           v-if="news.urlToImage"
+        />
+        <img
+          class="rounded-2xl"
+          src="@/assets/images/01.jpeg"
+          alt="Card image"
+          v-else
         />
         <div class="w-full text-center lg:text-left card-image-overlay">
           <div class="mt-auto w-full">
@@ -21,9 +22,12 @@
       </div>
       <div class="card-body px-0 pt-3">
         <h4 class="card-title">
-          <a href="post-single.html" class="btn-link text-reset font-bold">{{
-            news.source && news.source.name
-          }}</a>
+          <a
+            :href="news.url"
+            class="btn-link text-reset font-bold"
+            target="_blank"
+            >{{ news.source && news.source.name }}</a
+          >
         </h4>
         <p class="card-text">
           {{ news.title }}
