@@ -1,33 +1,47 @@
 <template>
   <div class="w-1/2 px-6">
     <div class="card">
-      <div class="relative">
+      <div
+        class="relative"
+        :style="[
+          !news.urlToImage ? { backgroundColor: 'black', height: '300px' } : '',
+        ]"
+      >
         <img
           class="rounded-2xl"
-          src="@/assets/images/01.jpg"
+          :src="news.urlToImage"
           alt="Card image"
+          v-if="news.urlToImage"
         />
         <div class="w-full text-center lg:text-left card-image-overlay">
           <div class="mt-auto w-full">
-            <a href="#" class="badge bg-danger mb-2">Lifestyle</a>
+            <!-- <a href="#" class="badge bg-danger mb-2">{{Lifestyle}}</a> -->
           </div>
         </div>
       </div>
       <div class="card-body px-0 pt-3">
         <h4 class="card-title">
-          <a href="post-single.html" class="btn-link text-reset font-bold"
-            >Bad habits that people in the industry need to quit</a
-          >
+          <a href="post-single.html" class="btn-link text-reset font-bold">{{
+            news.source && news.source.name
+          }}</a>
         </h4>
         <p class="card-text">
-          For who thoroughly her boy estimating conviction. Removed demands
-          expense account in outward tedious do. Particular way thoroughly
-          unaffected
+          {{ news.title }}
         </p>
       </div>
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    news: {
+      required: true,
+      default: () => {},
+    },
+  },
+};
+</script>
 <style scoped lang="scss">
 .card-image-overlay {
   position: absolute;

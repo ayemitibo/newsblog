@@ -1,15 +1,15 @@
 <template>
   <section class="skewed-bottom-right">
+    {{ country }}
     <div class="bg-gray-50 pt-12 lg:pt-20 pb-20 radius-for-skewed">
       <div class="container mx-auto px-4">
         <!-- blog card -->
         <div class="flex mt-4">
           <div class="w-9/12">
             <div class="flex flex-wrap">
-              <blog-card />
-              <blog-card />
-              <blog-card />
-              <blog-card />
+              <template v-for="(item, index) in news && news.articles">
+                <blog-card :key="index" :news="item" />
+              </template>
             </div>
           </div>
           <div class="w-1/4">
@@ -33,9 +33,10 @@ export default {
   },
   data() {
     return {
-      location: null,
+      country: null,
       gettingLocation: false,
       errorStr: null,
+      news: [],
     };
   },
   async mounted() {
@@ -45,8 +46,8 @@ export default {
         country: country.country_code,
       },
     });
-
-    console.log(news, "news");
+    this.news = news;
+    this.country = country.country;
   },
 };
 </script>
