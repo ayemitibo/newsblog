@@ -15,9 +15,7 @@
           v-else
         />
         <div class="w-full text-center lg:text-left card-image-overlay">
-          <div class="mt-auto w-full">
-            <!-- <a href="#" class="badge bg-danger mb-2">{{Lifestyle}}</a> -->
-          </div>
+          <slot name="readLater" />
         </div>
       </div>
       <div class="card-body px-0 pt-3">
@@ -43,6 +41,17 @@ export default {
       required: true,
       default: () => {},
     },
+    savedNews: {
+      required: true,
+      default: () => [],
+    },
+  },
+  computed: {
+    // isSavedInStore() {
+    //   return this.savedNews.some((item) => {
+    //     item.title == this.news.title;
+    //   });
+    // },
   },
 };
 </script>

@@ -5,7 +5,7 @@ export const apiClient = axios.create({
   baseURL: "https://newsapi.org/v2/",
   headers: {
     Accept: "application/json",
-    'X-Api-Key' : '96ef503dc8664873a3299cab06b09f86',
+    'X-Api-Key' : 'e0b79716b80a4355a9f5a8df0ceaf8c2',
   }
 });
 apiClient.interceptors.request.use(config => {
