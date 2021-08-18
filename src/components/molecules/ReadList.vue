@@ -1,7 +1,7 @@
 <template>
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div @click.stop="showFunc">
-    <slot name="activator" :show="() => showFunc()" />
+    <slot name="activator" />
     <div
       class="fixed z-10 inset-0 overflow-y-auto"
       aria-labelledby="modal-title"
@@ -34,11 +34,11 @@
           class="
             inline-block
             h-screen
+            overflow-auto
             align-bottom
             bg-white
             rounded-lg
             text-left
-            overflow-hidden
             shadow-xl
             transform
             transition-all

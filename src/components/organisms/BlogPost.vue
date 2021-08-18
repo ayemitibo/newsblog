@@ -4,6 +4,8 @@
       <div class="container mx-auto">
         <div class="flex capitalize font-extrabold justify-between">
           <slot name="header" />
+          <slot name="homeRoute" />
+          <slot name="search" :search="searchBlog" />
           <div class="flex items-center font-normal">
             <country-flag
               :country="countryCode"
@@ -39,8 +41,8 @@
         <!-- blog card -->
         <div class="flex mt-4">
           <div class="w-9/12">
-            <spinner v-if="loading" />
-            <template v-else>
+            <spinner v-show="loading" />
+            <div v-show="!loading">
               <div class="flex flex-wrap">
                 <template v-for="(item, index) in news && news.articles">
                   <blog-card
@@ -57,25 +59,11 @@
               <pagination
                 ref="paginate"
                 @get-blog="getBlog"
+                :end="paginationItem"
                 v-if="paginationItem"
               >
-                <template #default="{ currentItem }">
-                  <li
-                    class="pagination__item p-2"
-                    v-for="item in paginationItem"
-                    :key="item"
-                    @click="paginate(item)"
-                  >
-                    <a
-                      href="#"
-                      class="pagination__link"
-                      :class="[currentItem === item ? 'active' : null]"
-                      >{{ item }}
-                    </a>
-                  </li>
-                </template>
               </pagination>
-            </template>
+            </div>
           </div>
           <div class="w-1/4">
             <category />
@@ -89,19 +77,19 @@
 <script>
 import BlogCard from "../molecules/BlogCard.vue";
 import Category from "../molecules/Category.vue";
-import Pagination from "../molecules/Pagination.vue";
 import Spinner from "../atoms/Spinner.vue";
 import ReadLaterButton from "../atoms/ReadLaterButton";
 import ReadList from "../molecules/ReadList";
+import Pagination from "../molecules/Pagination.vue";
 export default {
   name: "Home",
   components: {
     BlogCard,
     Category,
-    Pagination,
     Spinner,
     ReadLaterButton,
     ReadList,
+    Pagination,
   },
   data() {
     return {
@@ -110,6 +98,9 @@ export default {
       errorStr: null,
       news: [],
       loading: false,
+      page: 1,
+      searchValue: "",
+      savedNews: localStorage.getItem("blogItems"),
     };
   },
   async mounted() {
@@ -119,19 +110,24 @@ export default {
   },
   computed: {
     paginationItem() {
-      return Math.ceil(this.news?.totalResults / 5);
+      return this.news?.totalResults;
     },
     countryCode() {
       return this.country?.country_code;
     },
-    blogItemsFromStorage() {
-      let blogItems;
-      if (localStorage.getItem("blogItems") === null) {
-        blogItems = [];
-      } else {
-        blogItems = JSON.parse(localStorage.getItem("blogItems"));
-      }
-      return blogItems;
+    blogItemsFromStorage: {
+      get() {
+        let blogItems;
+        if (this.savedNews === null) {
+          blogItems = [];
+        } else {
+          blogItems = JSON.parse(this.savedNews);
+        }
+        return blogItems;
+      },
+      set(value) {
+        this.savedNews = value;
+      },
     },
   },
   methods: {
@@ -142,6 +138,7 @@ export default {
           country: this.country.country_code,
           page: item || 1,
           category: this.$route.params.category,
+          q: this.searchValue || "",
         },
       });
       this.news = news;
@@ -159,14 +156,39 @@ export default {
       blogItems.push(blogItem);
 
       localStorage.setItem("blogItems", JSON.stringify(blogItems));
+      this.blogItemsFromStorage = JSON.stringify(blogItems);
     },
+    searchBlog(e) {
+      if (e.target.value) {
+        this.searchValue = e.target.value;
+        this.debounce(async () => {
+          this.loading = true;
+          let news = await this.$http.get("/everything", {
+            params: {
+              q: this.searchValue,
+            },
+          });
+          this.news = news;
+          this.loading = false;
+        }, 1000);
+      }
+    },
+  },
+  created() {
+    this.debounce = this.$utils.createDebounce();
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .pagination__link {
   &.active {
     @apply underline;
+  }
+}
+
+.paginate {
+  ul.VuePagination__pagination {
+    display: flex;
   }
 }
 </style>

@@ -15,7 +15,7 @@
           v-else
         />
         <div class="w-full text-center lg:text-left card-image-overlay">
-          <slot name="readLater" />
+          <slot name="readLater" v-if="!isSavedInStore" />
         </div>
       </div>
       <div class="card-body px-0 pt-3">
@@ -47,11 +47,12 @@ export default {
     },
   },
   computed: {
-    // isSavedInStore() {
-    //   return this.savedNews.some((item) => {
-    //     item.title == this.news.title;
-    //   });
-    // },
+    isSavedInStore() {
+      const mappedData = this.savedNews.map((item) => {
+        return item.title;
+      });
+      return mappedData.includes(this.news.title);
+    },
   },
 };
 </script>
