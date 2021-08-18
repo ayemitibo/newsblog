@@ -1,6 +1,6 @@
 <template>
   <blog-post ref="blog">
-    <template #header> {{ getRouteName }} Section </template>
+    <template #header> {{ getRouteName }} Category </template>
     <template #homeRoute>
       <router-link to="/" class="underline" tag="a">Go to Home</router-link>
     </template>

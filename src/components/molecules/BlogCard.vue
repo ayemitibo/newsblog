@@ -67,7 +67,7 @@ export default {
   left: 0;
   padding: 1.25rem;
   border-radius: 0.7rem;
-  padding: 2rem !important;
+  padding: 1rem !important;
   @apply flex items-center;
 
   .bg-danger {
