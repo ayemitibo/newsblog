@@ -1,5 +1,5 @@
 <template>
-  <div class="w-1/2 px-6">
+  <div class="sm:w-1/2 px-6">
     <div class="card">
       <div class="relative">
         <img

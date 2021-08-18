@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 class="mt-4 mb-3">Trending topics</h4>
+    <h4 class="mt-4 mb-3">Categories</h4>
     <!-- Category item -->
     <template v-for="(item, index) in categories">
       <category-item :key="index" :category="item" />

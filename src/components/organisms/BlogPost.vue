@@ -2,7 +2,9 @@
   <section class="skewed-bottom-right">
     <div class="pt-12 lg:pt-20 pb-20 radius-for-skewed">
       <div class="container mx-auto">
-        <div class="flex capitalize font-extrabold justify-between">
+        <div
+          class="flex capitalize font-extrabold justify-between items-center"
+        >
           <slot name="header" />
           <slot name="homeRoute" />
           <slot name="search" :search="searchBlog" />
@@ -11,8 +13,11 @@
               :country="countryCode"
               size="big"
               v-if="countryCode"
+              class="mr-2"
             />
-            <span class="pl-2 mr-3">{{ country && country.country }}</span>
+            <span class="pl-2 mr-3 hidden md:block lg:block">{{
+              country && country.country
+            }}</span>
             <read-list :storedItem="blogItemsFromStorage">
               <template #activator>
                 <svg
@@ -39,7 +44,7 @@
       </div>
       <div class="container mx-auto px-4">
         <!-- blog card -->
-        <div class="flex mt-4">
+        <div class="sm:flex mt-4">
           <div class="sm:w-full md:w-9/12 lg:w-9/12">
             <spinner v-show="loading" />
             <div v-show="!loading">
