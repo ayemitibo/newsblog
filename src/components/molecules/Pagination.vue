@@ -37,11 +37,9 @@ export default {
     moveNext(event) {
       event.preventDefault();
       if (this.currentStep >= this.end) {
-        console.log("here");
         return;
       } else {
         this.currentStep = this.currentStep + 1;
-        console.log(this.currentStep, "curreent");
         this.$emit("get-blog", this.currentStep);
       }
     },

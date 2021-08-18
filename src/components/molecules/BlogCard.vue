@@ -15,7 +15,9 @@
           v-else
         />
         <div class="w-full text-center lg:text-left card-image-overlay">
-          <slot name="readLater" v-if="!isSavedInStore" />
+          <transition name="fade">
+            <slot name="readLater" v-if="!isSavedInStore" />
+          </transition>
         </div>
       </div>
       <div class="card-body px-0 pt-3">
@@ -120,5 +122,12 @@ export default {
 
 .card-title {
   margin-bottom: 0.5rem;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

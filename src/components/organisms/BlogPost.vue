@@ -12,7 +12,7 @@
               size="big"
               v-if="countryCode"
             />
-            <span class="pl-2">{{ country && country.country }}</span>
+            <span class="pl-2 mr-3">{{ country && country.country }}</span>
             <read-list :storedItem="blogItemsFromStorage">
               <template #activator>
                 <svg
