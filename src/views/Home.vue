@@ -6,7 +6,7 @@
         <input
           type="search"
           class="bg-purple-white shadow rounded border-0 p-3"
-          placeholder="Search by name..."
+          placeholder="Search ..."
           @input="search($event)"
         />
         <div
