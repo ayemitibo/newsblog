@@ -40,7 +40,7 @@
       <div class="container mx-auto px-4">
         <!-- blog card -->
         <div class="flex mt-4">
-          <div class="w-9/12">
+          <div class="sm:w-full md:w-9/12 lg:w-9/12">
             <spinner v-show="loading" />
             <div v-show="!loading">
               <div class="flex flex-wrap">
@@ -65,7 +65,7 @@
               </pagination>
             </div>
           </div>
-          <div class="w-1/4">
+          <div class="w-full md:w-1/4 lg:w-1/4">
             <category />
           </div>
         </div>

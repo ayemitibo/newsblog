@@ -52,7 +52,7 @@
             <div class="sm:flex sm:items-start">
               <div class="card overflow-auto">
                 <div
-                  class="flex border-b border-dashed border-red-200 pb-2"
+                  class="flex border-b border-dashed border-red-200 pb-2 pt-2"
                   v-for="(item, index) in storedItem"
                   :key="index"
                 >
@@ -65,7 +65,12 @@
                     />
                   </div>
                   <div class="w-2/3">
-                    <h6 class="font-bold text-sm">{{ item.title }}</h6>
+                    <a
+                      class="font-bold text-sm"
+                      :href="item.url"
+                      target="_blank"
+                      >{{ item.title }}</a
+                    >
                   </div>
                 </div>
               </div>
